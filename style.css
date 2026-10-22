@@ -1,0 +1,107 @@
+:root {
+  --bg: #0f1629;
+  --text: #8f9bb8;
+  --heading: #e3e9f7;
+  --accent: #7aa2ff;
+  --chip: rgba(122, 162, 255, 0.12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  font-size: 17px;
+}
+
+/* cursor spotlight */
+.glow {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(600px circle at var(--x, 20%) var(--y, 10%), rgba(60, 100, 220, 0.16), transparent 80%);
+}
+
+a { color: inherit; text-decoration: none; }
+strong { color: var(--heading); font-weight: 600; }
+
+.layout {
+  position: relative; z-index: 1;
+  max-width: 1200px; margin: 0 auto; padding: 0 24px;
+  display: flex; gap: 80px;
+}
+
+/* LEFT: stays in place */
+.left {
+  position: sticky; top: 0;
+  height: 100vh; width: 42%;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 96px 0;
+}
+.left h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; color: var(--heading); letter-spacing: -0.02em; }
+.left h2 { margin-top: 14px; font-size: 1.25rem; font-weight: 500; color: var(--heading); }
+.tagline { margin-top: 16px; max-width: 320px; }
+
+.nav { margin-top: 64px; display: flex; flex-direction: column; gap: 6px; }
+.nav a { display: flex; align-items: center; gap: 16px; padding: 8px 0; }
+.nav .line { width: 32px; height: 1px; background: var(--text); transition: all .25s; }
+.nav .label { font-size: .75rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; transition: color .25s; }
+.nav a:hover .line, .nav a.active .line { width: 64px; background: var(--heading); }
+.nav a:hover .label, .nav a.active .label { color: var(--heading); }
+
+.social { list-style: none; display: flex; gap: 20px; }
+.social a { display: block; width: 26px; height: 26px; transition: color .2s, transform .2s; }
+.social a:hover { color: var(--heading); transform: translateY(-2px); }
+
+/* RIGHT: scrolls */
+.right { width: 58%; padding: 96px 0; }
+section { margin-bottom: 96px; scroll-margin-top: 96px; }
+section p { margin-bottom: 18px; }
+.mobile-title { display: none; }
+
+.item {
+  display: grid; grid-template-columns: 150px 1fr; gap: 24px;
+  padding: 18px; margin: 0 -18px 12px; border-radius: 8px;
+  transition: background .25s;
+}
+.item:hover { background: rgba(122, 162, 255, 0.06); }
+.date { font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding-top: 4px; }
+.item h4 { color: var(--heading); font-size: 1.05rem; font-weight: 500; line-height: 1.4; }
+.item ul { margin: 10px 0 0 18px; font-size: .95rem; }
+.item li { margin-bottom: 4px; }
+.muted { font-size: .95rem; margin-top: 4px; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.tags span {
+  background: var(--chip); color: var(--accent);
+  font-size: .78rem; font-weight: 500; padding: 4px 12px; border-radius: 999px;
+}
+.tags.big span { font-size: .85rem; padding: 6px 14px; }
+.langs { margin-top: 20px; }
+
+.btn {
+  display: inline-block; margin: 6px 10px 0 0; padding: 12px 22px;
+  border: 1px solid var(--accent); border-radius: 6px;
+  color: var(--accent); font-weight: 500; font-size: .95rem;
+  transition: background .2s, color .2s;
+}
+.btn:hover { background: var(--accent); color: var(--bg); }
+.btn.ghost { border-color: var(--text); color: var(--text); }
+.btn.ghost:hover { background: var(--text); color: var(--bg); }
+
+footer { margin-top: 64px; font-size: .8rem; }
+
+/* Tablet / mobile: stack, nothing fixed */
+@media (max-width: 900px) {
+  .layout { flex-direction: column; gap: 0; padding: 0 20px; }
+  .left { position: static; height: auto; width: 100%; padding: 64px 0 32px; gap: 32px; }
+  .nav { display: none; }
+  .right { width: 100%; padding: 16px 0 64px; }
+  section { margin-bottom: 64px; }
+  .mobile-title {
+    display: block; margin-bottom: 20px; color: var(--heading);
+    font-size: .8rem; letter-spacing: .14em; text-transform: uppercase;
+  }
+  .item { grid-template-columns: 1fr; gap: 6px; }
+}
